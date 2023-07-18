@@ -178,4 +178,69 @@ const userRouter = express.Router();
 userRouter.get("/count", (req, res) => {
 …
 })
+
+// Gesamtpfad: /user/count
 ```
+
+### Express Request
+- **Content** über body zugreifbar: field _body_
+- **Header** kann man über get lesen: field _header_
+- **Parameter** sind platzhalter: field _params_
+- **Query** Argumente liegen als Objekte vor: field _query_
+
+### Express Response
+- finden sich in _express.Response_ wieder
+- **Content** auch hier im _body_
+- **Header** kann über _set()_ setzen oder _getHeader()_ lesen und schreiben
+- **Status-Code** üder _status()_ oder _sendStatus()_ gesetzt bei _setStatus()_ mit Text im Body automatisch
+
+### Request Validierung
+- Eingabe niemals trauen <sub>jeder kann einen Request beliebig
+manipulieren</sub>
+- validierung im Router hat den Vorteil, dass unnötige Datenbankabfrage verhindert wird
+- Validierung über express-validator als middleware gibt JSON Fehler zurück
+
+### Sanitization
+- Daten _reinigen_
+- Prüfung der Länge
+- Normalisierung z.B. _E-Mail-Adressen_
+- Ersetzen von _problematischen_ Zeichen
+- Löschen von nicht benötigten Daten
+
+## Sicherheit
+### Schutzziel: CIA
+- Confidentiality
+- Integrity
+- Availability
+
+- werden u.a. mit Middlewares umgesetzt
+
+### Authentifizierung und Autorisierung
+- **authentication:** Verifizierung der behaupteten Identität einer Entität
+- **authorization:** Einräumung von Rechten, inklusive der Gewährung von Zugriff aufgrund von Zugriffsrechten
+
+### Verifikation
+Kann auf verschiedene Verfahren durchgeführt werden, die auf verschiedenen **Faktoren** basieren
+- **Wissen:** Passwörter, PIN
+- **Besitz:** Schlüssel, Karte, Telefon
+- **Inhärenz:** Biometrie
+
+### Asymmetrische Verschlüsselung
+|private.key|public.crt|
+|:---:|:---:|
+| openssl -rsoutl **-sign** -inkey **private.key** -in name.txt -out **text.sgn** | openssl rsautl **-encrypt** -inkey **public.crt** -certin -in text.txt -out **text.enc**|
+|openssl rsautl **-decrypt** -inkey **private.key** -in **text.enc** -out text.dec| openssl rsautl **-verify** -inkey **public.crt** -certin -in **text.sgn** -out text.vfy|
+
+### JSON Web Token (JWT)
+- **Bearer-Token** (Access-Token)
+    - Access Token sind Credentials
+    - wird wie Passwort verwendet um auf geschützte Ressourcen zuzugreifen
+    - der String enthält auf Client ausgestellte Autorisation
+- **JWT**
+    - Standard für Web-Apps 
+    - kompaktes Darstellungsformat
+    - eingesetzt bei HTTP Authorization
+
+    - Base-64 dekodiert (bzw. Base64URL)
+
+## Frontend

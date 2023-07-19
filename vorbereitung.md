@@ -278,3 +278,8 @@ import './App.css';             // eine CSS Datei
         return <div>Hello world</div>;
     }
     ~~~
+
+### JSX
+- syntactic sugar für React-Elemente
+- HTML ähnliche Syntax
+- **Keine** DOM-Elemente/-Nodes **sondern** React-Elemente/-nodes

@@ -335,25 +335,25 @@ React.useEffect(() => { load() }, [])
 ### Wichtige React Hooks
 Von den 10 offiziellen React-Hooks sind nur drei für uns relevant:
 
-## useState
+#### useState
 - ermöglicht es, den Zustand einer Komponente in React zu verwalten
 - besteht aus eigentlichem Wert und Funktion zum Aktualisieren des Werts:
 ~~~typescript
 //   Name und Funktion                 Datentyp       Default-Wert
 const [wert, setWert] = React.useState<String | null>("Startwert");
 ~~~
-## useEffect
+#### useEffect
 - ermöglicht es, Nebeneffekte zu behandeln, also Code auszuführen nach dem die Komponente gerendert wurde
 - besteht aus Funktionsaufruf und optionalem "Trigger"
 ~~~typescript
 //    Aufruf der Funktion ↓          ↓ "Trigger"-Variable (optional)
 React.useEffect(() => { load() }, [wert])
 ~~~
-## useContext
+#### useContext
 - ermöglicht den Zugriff auf einen Context in React-Komponenten
 - Context = Mechanismus, um Daten an Komponenten in der Komponentenbaum-Hierarchie weiterzugeben
 
-# Definition des Context:
+##### Definition des Context:
 ~~~typescript
 export interface LoginInfo {
     userId: string,
@@ -370,7 +370,7 @@ export const LoginContext = React.createContext<LoginContextType>({} as LoginCon
 // Ein Export für die "Konsumenten"
 export const useLoginContext = () => React.useContext(LoginContext);
 ~~~
-# Nutzung des Providers:
+##### Nutzung des Providers:
 ~~~typescript
 //Import des Contextes
 import { LoginContext } from "./LoginContext";
@@ -387,7 +387,7 @@ function App() {
     )
 }
 ~~~
-# Nutzung des Context
+##### Nutzung des Context
 ~~~typescript
 //Import des Contextes
 import { useLoginContext } from '../LoginContext';

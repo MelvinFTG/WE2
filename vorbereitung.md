@@ -247,3 +247,34 @@ Kann auf verschiedene Verfahren durchgeführt werden, die auf verschiedenen **Fa
     - Base-64 dekodiert (bzw. Base64URL)
 
 ## Frontend
+### Webpack
+- static assets oder css Datein werden automatisch eingebunden
+- werden im JavaScript Quelltext importiert
+- man benötigt kein asset verzeichnis
+~~~typescript
+import React from 'react';      // normaler Modul Import
+import logo from './logo.svg';  // 'logo' kann als Pfandangabe verwendet werden
+import './App.css';             // eine CSS Datei
+~~~
+
+## React
+- vereinfacht Arbeit mit DOM
+- ausgelegt auf Single Page Apps 
+- extrem performant
+
+### UI-Komponenten
+- gibt 2 Arten von Komponenten
+    - **Class Components:** überschreibt die Methode _Render_
+    ~~~typescript
+    export class ClassComp extens React.Component{
+        override render(): JSX.Element {
+            return <div>Hello World</div>;
+        }
+    }
+    ~~~
+    - **Function Components:** ganz normale JavaScript-Funktionen
+    ~~~typescript
+    export function FunctionComp(){
+        return <div>Hello world</div>;
+    }
+    ~~~

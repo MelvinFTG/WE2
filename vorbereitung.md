@@ -283,3 +283,43 @@ import './App.css';             // eine CSS Datei
 - syntactic sugar für React-Elemente
 - HTML ähnliche Syntax
 - **Keine** DOM-Elemente/-Nodes **sondern** React-Elemente/-nodes
+
+
+## Fetch API
+- ermöglicht, HTTP-Anfragen zu erstellen und Daten von Servern asynchron zu laden
+- in unserem Anwendungsfall genutzt für die Kommunikation zwischen Front- und Backend
+- bekommt ein notwendiges Argument (URL) und optionale Parameter in einem Objektliteral:
+~~~typescript
+let url = "some.url";
+let par = { method: "GET" };
+
+await fetch(url, par);
+~~~
+- Sieht angewendet so aus:
+~~~typescript
+const data = await fetch("url.de", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ "email": userid })
+});
+~~~
+
+
+## Asynchrone Aufrufe in React
+- In React ist es nicht ohne weiteres möglich asynchrone Funktionen aufzurufen
+- Der Aufruf erfordert den Einsatz von Hooks:
+~~~typescript
+//Asynchrone Funktion:
+async function load() {
+    try {
+        const shopItem = await getShopItem(shopItemId!);
+        setShopItem(shopItem);
+    } catch (e) {
+        setShopItem(null);
+        showBoundary(e);
+    }
+}
+
+//Aufruf der Funktion ohne await via useEffect-Hook:
+React.useEffect(() => { load() }, [])
+~~~

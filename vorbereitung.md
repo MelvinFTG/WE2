@@ -28,6 +28,7 @@
 - erlaubt JSON / XML
 - ist Ressourcenorientiert
 - RESTful Anwendungen unterstützen CRUD
+- Architekturstil gibt vorgaben über Art der Kommunikation
 
 #### Rest Constraints
 - Client-Server:

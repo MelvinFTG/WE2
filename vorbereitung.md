@@ -7,7 +7,7 @@
     - [Express](#express)
     - [Sicherheit](#sicherheit)
 2. [Frontend](#frontend)
-## Backend
+# Backend
 ## Rest
 #### Representational State Transfer
 - erlaubt JSON / XML
@@ -246,7 +246,7 @@ Kann auf verschiedene Verfahren durchgeführt werden, die auf verschiedenen **Fa
 
     - Base-64 dekodiert (bzw. Base64URL)
 
-## Frontend
+# Frontend
 ### Webpack
 - static assets oder css Datein werden automatisch eingebunden
 - werden im JavaScript Quelltext importiert

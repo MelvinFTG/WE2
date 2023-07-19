@@ -7,6 +7,11 @@
     - [Express](#express)
     - [Sicherheit](#sicherheit)
 2. [Frontend](#frontend)
+    - [Webpack](#webpack)
+    - [React](#react)
+    - [UI-Komponenten](#UI-Komponenten)
+    - [JSX](#JSX)
+      
 # Backend
 ## Rest
 #### Representational State Transfer
@@ -285,7 +290,7 @@ import './App.css';             // eine CSS Datei
 - **Keine** DOM-Elemente/-Nodes **sondern** React-Elemente/-nodes
 
 
-## Fetch API
+### Fetch API
 - ermöglicht, HTTP-Anfragen zu erstellen und Daten von Servern asynchron zu laden
 - in unserem Anwendungsfall genutzt für die Kommunikation zwischen Front- und Backend
 - bekommt ein notwendiges Argument (URL) und optionale Parameter in einem Objektliteral:
@@ -305,11 +310,13 @@ const data = await fetch("url.de", {
 ~~~
 
 
-## Asynchrone Aufrufe in React
+### Asynchrone Aufrufe in React
 - In React ist es nicht ohne weiteres möglich asynchrone Funktionen aufzurufen
 - Der Aufruf erfordert den Einsatz von Hooks:
 ~~~typescript
-//Asynchrone Funktion:
+//Innerhalb React-Komponente:
+
+//Asynchroner Funktionsaufruf in asynchroner Funktion:
 async function load() {
     try {
         const shopItem = await getShopItem(shopItemId!);
@@ -323,3 +330,79 @@ async function load() {
 //Aufruf der Funktion ohne await via useEffect-Hook:
 React.useEffect(() => { load() }, [])
 ~~~
+
+
+### Wichtige React Hooks
+Von den 10 offiziellen React-Hooks sind nur drei für uns relevant:
+
+## useState
+- ermöglicht es, den Zustand einer Komponente in React zu verwalten
+- besteht aus eigentlichem Wert und Funktion zum Aktualisieren des Werts:
+~~~typescript
+//   Name und Funktion                 Datentyp       Default-Wert
+const [wert, setWert] = React.useState<String | null>("Startwert");
+~~~
+## useEffect
+- ermöglicht es, Nebeneffekte zu behandeln, also Code auszuführen nach dem die Komponente gerendert wurde
+- besteht aus Funktionsaufruf und optionalem "Trigger"
+~~~typescript
+//    Aufruf der Funktion ↓          ↓ "Trigger"-Variable (optional)
+React.useEffect(() => { load() }, [wert])
+~~~
+## useContext
+- ermöglicht den Zugriff auf einen Context in React-Komponenten
+- Context = Mechanismus, um Daten an Komponenten in der Komponentenbaum-Hierarchie weiterzugeben
+
+# Definition des Context:
+~~~typescript
+export interface LoginInfo {
+    userId: string,
+}
+
+interface LoginContextType {
+    loginInfo: LoginInfo | null;
+    setLoginInfo: (loginInfo: LoginInfo | null) => void
+}
+
+// Ein Export für den "Provider"
+export const LoginContext = React.createContext<LoginContextType>({} as LoginContextType);
+
+// Ein Export für die "Konsumenten"
+export const useLoginContext = () => React.useContext(LoginContext);
+~~~
+# Nutzung des Providers:
+~~~typescript
+//Import des Contextes
+import { LoginContext } from "./LoginContext";
+
+function App() {
+    //Anlegen eines States für den Context
+    const [loginInfo, setLoginInfo] = React.useState(...);
+
+    return (
+        //"Ummantelung" der Konsumenten
+        <LoginContext.Provider value={{ loginInfo, setLoginInfo }}>
+            <...> Konsumenten-Komponenten </...>
+        </LoginContext.Provider>
+    )
+}
+~~~
+# Nutzung des Context
+~~~typescript
+//Import des Contextes
+import { useLoginContext } from '../LoginContext';
+...
+//Nutzung von Wert und der set-Funktion:
+    const { loginInfo, setLoginInfo } = useLoginContext();
+~~~
+
+
+### SOP
+- steht für **S**ingle **O**rigin **P**olicy
+- Sicherheitsrichtlinie des Webbrowsers
+- verhindert, dass JS auf Ressourcen anderer Webseiten zugreifen kann
+
+### CORS
+- steht für **C**ross **O**rigin **R**esource **S**haring
+- ermöglicht bypass der SOP und dadurch Ressourcen zwischen verschiedenen Ursprungs-URLs freizugeben
+- benötigt serverseitige Konfiguration durch Hinzufügen bestimmter HTTP-Headerfelder

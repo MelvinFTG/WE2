@@ -11,6 +11,16 @@
     - [React](#react)
     - [UI-Komponenten](#UI-Komponenten)
     - [JSX](#JSX)
+    - [Fetch API](#Fetch-API)
+    - [Asynchrone Aufrufe in React](#Asynchrone-Aufrufe-in-React)
+    - [Wichtige React-Hooks](#Wichtige-React-Hooks)
+    - [SOP](#SOP)
+    - [CORS](#CORS)
+    - [Error Boundary](#Error-Boundary)
+    - [Kommunikation zwischen Komponenten](#Kommunikation-zwischen-Komponenten)
+    - [DOM-Events vs React-Events](#DOM-Events-vs-React-Events)
+
+
       
 # Backend
 ## Rest
@@ -402,7 +412,21 @@ import { useLoginContext } from '../LoginContext';
 - Sicherheitsrichtlinie des Webbrowsers
 - verhindert, dass JS auf Ressourcen anderer Webseiten zugreifen kann
 
+
 ### CORS
 - steht für **C**ross **O**rigin **R**esource **S**haring
 - ermöglicht bypass der SOP und dadurch Ressourcen zwischen verschiedenen Ursprungs-URLs freizugeben
 - benötigt serverseitige Konfiguration durch Hinzufügen bestimmter HTTP-Headerfelder
+
+
+### Error Boundary
+...
+
+
+### Kommunikation zwischen Komponenten
+...
+
+
+### DOM-Events vs. React-Events
+...
+
